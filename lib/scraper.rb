@@ -23,7 +23,7 @@ class Scraper
     doc = Nokogiri::HTML(open(profile_url))
     student_profile = {}
     social_links = doc.css(".social-icon-container a")
-    
+
     counter = 0
     while student_profile.length < social_links.length do
       if social_links[counter]["href"].include?("twitter")
@@ -39,7 +39,7 @@ class Scraper
     end
 
     student_profile[:profile_quote] = doc.css(".profile-quote").text.strip
-    student_profile[:bio] = doc.css(".bio-content.content-holder p").first(p).text
+    student_profile[:bio] = doc.css(".bio-content.content-holder p").text.strip.first(p)
     student_profile
   end
 
